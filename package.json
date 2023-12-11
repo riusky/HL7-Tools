@@ -1,0 +1,34 @@
+{
+  "name": "yd_tools",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "tauri": "tauri"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
+    "@tauri-apps/api": "^1.5.1",
+    "@vueuse/core": "^10.7.0",
+    "axios": "^1.6.2",
+    "echarts": "^5.4.3",
+    "element-plus": "^2.4.3",
+    "mitt": "^3.0.1",
+    "pinia": "^2.1.7",
+    "vue": "^3.3.4",
+    "vue-router": "4"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^1.5.6",
+    "@types/node": "^20.10.4",
+    "@vitejs/plugin-vue": "^4.2.3",
+    "sass": "^1.69.5",
+    "typescript": "^5.0.2",
+    "unplugin-auto-import": "^0.17.2",
+    "vite": "^4.4.4",
+    "vue-tsc": "^1.8.5"
+  }
+}
