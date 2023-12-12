@@ -14,6 +14,10 @@ import 'element-plus/dist/index.css'
 //引入echarts
 import * as echarts from 'echarts';
 import "@/styles/index.scss";
+
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
 const pinia = createPinia()
 const app = createApp(App)
 // 使用elementui的图标库
@@ -25,6 +29,7 @@ app.use(ElementPlus, {
   })
 app.use(router)
 app.use(pinia)
+app.use(VueAxios,axios)
 // 全局挂载
 app.config.globalProperties.$echarts = echarts;
 

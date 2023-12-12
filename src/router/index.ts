@@ -7,7 +7,7 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 const routes: Array<RouteRecordRaw> = [{
     path: '/',
     name: 'index',
-    component: () => import('@/components/Greet.vue'),  /* 路由懒加载 */
+    component: () => import('@/components/homepage/index.vue'),  /* 路由懒加载 */
 }, {
   path: '/a',
   name: 'a',

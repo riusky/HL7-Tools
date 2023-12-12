@@ -32,6 +32,9 @@ dependencies:
   vue:
     specifier: ^3.3.4
     version: 3.3.9(typescript@5.3.2)
+  vue-axios:
+    specifier: ^3.5.2
+    version: 3.5.2(axios@1.6.2)(vue@3.3.9)
   vue-router:
     specifier: '4'
     version: 4.2.5(vue@3.3.9)
@@ -1283,6 +1286,16 @@ packages:
     optionalDependencies:
       fsevents: 2.3.3
     dev: true
+
+  /vue-axios@3.5.2(axios@1.6.2)(vue@3.3.9):
+    resolution: {integrity: sha512-GP+dct7UlAWkl1qoP3ppw0z6jcSua5/IrMpjB5O8bh089iIiJ+hdxPYH2NPEpajlYgkW5EVMP95ttXWdas1O0g==, tarball: https://registry.npmmirror.com/vue-axios/-/vue-axios-3.5.2.tgz}
+    peerDependencies:
+      axios: '*'
+      vue: ^3.0.0 || ^2.0.0
+    dependencies:
+      axios: 1.6.2
+      vue: 3.3.9(typescript@5.3.2)
+    dev: false
 
   /vue-demi@0.14.6(vue@3.3.9):
     resolution: {integrity: sha512-8QA7wrYSHKaYgUxDA5ZC24w+eHm3sYCbp0EzcDwKqN3p6HqtTCGR/GVsPyZW92unff4UlcSh++lmqDWN3ZIq4w==, tarball: https://registry.npmmirror.com/vue-demi/-/vue-demi-0.14.6.tgz}

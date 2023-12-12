@@ -139,7 +139,7 @@ body{
 
 .sidebar .side-menu li:hover{
     height: 48px;
-    background: var(--success);
+    background: var(--dark);
     margin-left: 16px;
     border-radius: 48px 0 0 48px;
     padding: 4px;
