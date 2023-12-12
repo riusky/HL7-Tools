@@ -1,0 +1,16 @@
+{
+  "id": "4369565",
+  "name": "yd_tools",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "36987671",
+      "name": "fullscreen",
+      "font_class": "fullscreen",
+      "unicode": "e64d",
+      "unicode_decimal": 58957
+    }
+  ]
+}

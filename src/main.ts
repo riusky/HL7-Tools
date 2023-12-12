@@ -1,6 +1,8 @@
 import { createApp } from "vue";
 import { createPinia } from 'pinia'
 import "./styles.css";
+import "./assets/iconfont.js"
+import "./assets/iconfont.css"
 import App from "./App.vue";
 // 引入router的配置
 import router from '@/router/index'

@@ -1,4 +1,39 @@
 <script setup lang="ts">
+// 禁止右键和检查
+//禁止F12
+document.onkeydown = function (event: any) {
+    var winEvent: any = window.event
+    if (winEvent && winEvent.keyCode == 123) {
+        event.keyCode = 0
+        event.returnValue = false
+    }
+    if (winEvent && winEvent.keyCode == 13) {
+        winEvent.keyCode = 505
+    }
+}
+ 
+//屏蔽右键菜单
+document.oncontextmenu = function (event: any) {
+    if (window.event) {
+        event = window.event
+    }
+    try {
+        var the = event.srcElement
+        if (
+            !(
+                (the.tagName == 'INPUT' && the.type.toLowerCase() == 'text') ||
+                the.tagName == 'TEXTAREA'
+            )
+        ) {
+            return false
+        }
+        return true
+    } catch (e) {
+        return false
+    }
+}
+
+
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 // import Greet from "@components/Greet.vue";
@@ -10,13 +45,13 @@ import { useCounterStore } from '@/stores/windowsize'
 const store = useCounterStore()
 
 function toggleDarkDark() {
-    toggleDark();
-    store.isDark = !store.isDark
-    if (store.isDark) {
-      document.body.classList.add('dark');
-    } else {
-      document.body.classList.remove('dark');
-    }
+  toggleDark();
+  store.isDark = !store.isDark
+  if (store.isDark) {
+    document.body.classList.add('dark');
+  } else {
+    document.body.classList.remove('dark');
+  }
 }
 
 
@@ -96,7 +131,7 @@ onMounted(() => {
   <div class="sidebar">
     <a href="#" class="logo">
       <i class='bx bx-code-alt'></i>
-      <div class="logo-name"><span>Asmr</span>Prog</div>
+      <div class="logo-name"><span>Win</span>GED</div>
     </a>
     <ul class="side-menu">
       <li><a href="#"><el-icon class='bx bxs-dashboard'>
@@ -128,22 +163,24 @@ onMounted(() => {
       </el-icon>
       <div class="titlebar">
 
-<!-- 
+        <!-- 
         <input type="checkbox" id="theme-toggle" hidden>
         <label for="theme-toggle" class="theme-toggle"></label> -->
 
 
         <div class="titlebar-button">
-                <!-- <img src="https://api.iconify.design/mdi:window-minimize.svg" alt="minimize" /> -->
-                <!-- <el-icon style="color: aliceblue;"><Minus /></el-icon> -->
-                <el-icon @click="toggleDarkDark" v-show="!store.isDark" :size="20" style="color: (store.isDark ? '#030b25' : '#DCDFE6');">
-                    <Moon />
-                </el-icon>
+          <!-- <img src="https://api.iconify.design/mdi:window-minimize.svg" alt="minimize" /> -->
+          <!-- <el-icon style="color: aliceblue;"><Minus /></el-icon> -->
+          <el-icon @click="toggleDarkDark" v-show="!store.isDark" :size="20"
+            style="color: (store.isDark ? '#030b25' : '#DCDFE6');">
+            <Moon />
+          </el-icon>
 
-                <el-icon @click="toggleDarkDark" v-show="store.isDark" :size="20" style="color: (store.isDark ? '#030b25' : '#DCDFE6');">
-                    <Sunny />
-                </el-icon>
-            </div>
+          <el-icon @click="toggleDarkDark" v-show="store.isDark" :size="20"
+            style="color: (store.isDark ? '#030b25' : '#DCDFE6');">
+            <Sunny />
+          </el-icon>
+        </div>
 
         <div class="titlebar-button" id="titlebar-minimize">
           <!-- <img src="https://api.iconify.design/mdi:window-minimize.svg" alt="minimize" /> -->
@@ -153,19 +190,15 @@ onMounted(() => {
           </el-icon>
         </div>
         <div class="titlebar-button" id="titlebar-maximize">
-          <!-- <img src="https://api.iconify.design/mdi:window-maximize.svg" alt="maximize" /> -->
-          <el-icon style="color: (store.isDark ? '#030b25' : '#DCDFE6');">
-            <FullScreen />
+          <el-icon>
+            <span class="iconfont icon-fullscreen" :style="{'color': (store.isDark ? '#fff' : '#000')}"></span>
           </el-icon>
-        
+
         </div>
         <div class="titlebar-button" id="titlebar-close">
-          <!-- <el-icon style="color: aliceblue;"><Close /></el-icon> -->
-``
           <el-icon style="color: (store.isDark ? '#030b25' : '#DCDFE6');">
             <CloseBold />
           </el-icon>
-          <!-- <img src="https://api.iconify.design/mdi:close.svg" alt="close" /> -->
         </div>
 
       </div>
@@ -178,28 +211,28 @@ onMounted(() => {
     <main>
       <div class="header">
         <div class="left">
-          <h1>Dashboard</h1>
+          <h1>首页</h1>
           <ul class="breadcrumb">
             <li><a href="#">
-                Analytics
+                工具
               </a></li>
             /
-            <li><a href="#" class="active">Shop</a></li>
+            <li><a href="#" class="active">HL7</a></li>
           </ul>
         </div>
         <a href="#" class="report">
           <i class='bx bx-cloud-download'></i>
-          <span>Download CSV</span>
+          <span>新窗口打开</span>
         </a>
       </div>
       <el-row class="mb-4">
-    <el-button>Default</el-button>
-    <el-button type="primary">Primary</el-button>
-    <el-button type="success">Success</el-button>
-    <el-button type="info">Info</el-button>
-    <el-button type="warning">Warning</el-button>
-    <el-button type="danger">Danger</el-button>
-  </el-row>
+        <el-button>Default</el-button>
+        <el-button type="primary">Primary</el-button>
+        <el-button type="success">Success</el-button>
+        <el-button type="info">Info</el-button>
+        <el-button type="warning">Warning</el-button>
+        <el-button type="danger">Danger</el-button>
+      </el-row>
       <!-- Insights -->
       <ul class="insights">
         <li>
@@ -332,10 +365,20 @@ onMounted(() => {
   user-select: none;
   display: flex;
   justify-content: flex-end;
-  position:absolute;
+  position: absolute;
   top: 25;
   /* left: 0; */
   right: 0;
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+  /* color: aliceblue; */
+  color: #747bff;
 }
 
 .logo.vite:hover {

@@ -48,7 +48,7 @@ export default defineConfig(async () => ({
         rewrite: (path: string) => path.replace(/^\/api/, ""), //重写路径
       }
     },
-    port: 1420,
+    port: 9420,
     strictPort: true,
   }
 }));
