@@ -80,7 +80,7 @@
               <td>
                 <p>HL7发送工具</p>
               </td>
-              <td>14-08-2023</td>
+              <td>15-12-2023</td>
               <td><span class="status process">Processing</span></td>
             </tr>
             <tr>
@@ -94,7 +94,7 @@
               <td>
                 <p>代码生成</p>
               </td>
-              <td>24-12-2023</td>
+              <td>23-12-2023</td>
               <td><span class="status process">Processing</span></td>
             </tr>
           </tbody>
@@ -113,7 +113,7 @@
           <li class="completed">
             <div class="task-title">
               <i class='bx bx-check-circle'></i>
-              <p>使用sitesql完成本机的数据持久化</p>
+              <p>使用SQLite完成本机的数据持久化</p>
             </div>
             <i class='bx bx-dots-vertical-rounded'></i>
           </li>
@@ -138,16 +138,6 @@
 </template>
 
 <script lang="ts" setup>
-
-
-
-onMounted(() => {
-
-  axios.get('https://v1.jinrishici.com/all').then((response) => {
-    console.log(response.data)
-  })
-
-})
 
 
 

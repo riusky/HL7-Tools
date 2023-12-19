@@ -41,6 +41,7 @@ import { appWindow } from '@tauri-apps/api/window'
 import { toggleDark } from "@/composables";
 // import { storeToRefs } from 'pinia'
 import { useCounterStore } from '@/stores/windowsize'
+import { ElMessage } from 'element-plus'
 // 可以在组件中的任意位置访问 `store` 变量 ✨
 const store = useCounterStore()
 
@@ -58,6 +59,14 @@ function toggleDarkDark() {
 }
 
 function changeSidebar() {
+  if (window.innerWidth < 768) {
+    ElMessage({
+      message: '窗口太小无法展开,放大窗口后操作.',
+      type: 'warning',
+    })
+    sidebar.value = true
+    return
+  }
   const sideBar = document.querySelector('.sidebar');
   sidebar.value = !sidebar.value
   sideBar?.classList.toggle('close');
@@ -103,8 +112,10 @@ onMounted(() => {
   window.addEventListener('resize', () => {
     if (window.innerWidth < 768) {
       sideBar?.classList.add('close');
+      sidebar.value = true
     } else {
       sideBar?.classList.remove('close');
+      sidebar.value = false
     }
     if (window.innerWidth > 576) {
       searchBtnIcon?.classList.replace('bx-x', 'bx-search');
@@ -165,7 +176,7 @@ onMounted(() => {
       <el-icon v-show="!sidebar" @click="changeSidebar" class='bx' :size="25">
         <Fold />
       </el-icon>
-      <el-icon v-show="sidebar" @click="changeSidebar"  class='bx' :size="25">
+      <el-icon v-show="sidebar" @click="changeSidebar" class='bx' :size="25">
         <Expand />
       </el-icon>
       <div class="titlebar">
@@ -192,7 +203,7 @@ onMounted(() => {
         <div class="titlebar-button" id="titlebar-minimize">
           <!-- <img src="https://api.iconify.design/mdi:window-minimize.svg" alt="minimize" /> -->
           <!-- <el-icon style="color: aliceblue;"><Minus /></el-icon> -->
-          <el-icon >
+          <el-icon>
             <SemiSelect />
           </el-icon>
         </div>
@@ -203,7 +214,7 @@ onMounted(() => {
 
         </div>
         <div class="titlebar-button" id="titlebar-close">
-          <el-icon >
+          <el-icon>
             <CloseBold />
           </el-icon>
         </div>
