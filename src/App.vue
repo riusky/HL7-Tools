@@ -42,10 +42,19 @@ import { toggleDark } from "@/composables";
 // import { storeToRefs } from 'pinia'
 import { useCounterStore } from '@/stores/windowsize'
 import { ElMessage } from 'element-plus'
+import { useDark } from "@vueuse/core";
+import Header from '@/components/layout/Header.vue';
+
+import { watch, ref, onMounted } from 'vue'
+import { gobackUrl } from '@/main'
 // 可以在组件中的任意位置访问 `store` 变量 ✨
 const store = useCounterStore()
 
 const sidebar = ref(false)
+const isDark = useDark();
+let showBack = ref(false)
+const router = useRouter()
+let onTop = ref(false)
 
 
 function toggleDarkDark() {
@@ -61,10 +70,10 @@ function toggleDarkDark() {
 function changeSidebar() {
   if (window.innerWidth < 768) {
     ElMessage({
-      message: '窗口太小无法展开,放大窗口后操作.',
+      message: '窗口太小已禁用侧边栏展开.请调整窗口大小后重试!',
       type: 'warning',
     })
-    sidebar.value = true
+    sidebar.value = false
     return
   }
   const sideBar = document.querySelector('.sidebar');
@@ -72,9 +81,39 @@ function changeSidebar() {
   sideBar?.classList.toggle('close');
 }
 
+function getCharCount(str: string, char: string | RegExp) {
+  console.log('str', str)
+  var regex = new RegExp(char, 'g') // 使用g表示整个字符串都要匹配
+  var result = str.match(regex) //match方法可在字符串内检索指定的值，或找到一个或多个正则表达式的匹配。
+  var count = !result ? 0 : result.length
+  console.log('count', count)
+  return count
+}
+
+watch(() => router.currentRoute.value,
+  (newValue: any) => {
+    console.log('newValue', newValue)
+    if (newValue && getCharCount(newValue.fullPath, '/') > 1) {
+      showBack.value = true;
+    } else {
+      showBack.value = false;
+    }
+  },
+  { immediate: true }
+)
+
+function setAlwaysOnTop() {
+  onTop.value = !onTop.value
+  appWindow.setAlwaysOnTop(onTop.value)
+}
 
 onMounted(() => {
-  document.body.classList.add('dark');
+  store.isDark = isDark.value
+  if (isDark.value) {
+    document.body.classList.add('dark');
+  } else {
+    document.body.classList.remove('dark');
+  }
   document.getElementById('titlebar-minimize')!.addEventListener('click', () => appWindow.minimize())
   document.getElementById('titlebar-maximize')!.addEventListener('click', () => appWindow.toggleMaximize())
   document.getElementById('titlebar-close')!.addEventListener('click', () => appWindow.close())
@@ -143,33 +182,7 @@ onMounted(() => {
 
 <template>
   <!-- Sidebar -->
-  <div class="sidebar">
-    <a href="#" class="logo">
-      <i class='bx bx-code-alt'></i>
-      <div class="logo-name"><span>WIN</span>GED</div>
-    </a>
-    <ul class="side-menu">
-      <li><a href="#"><el-icon class='bx bxs-dashboard'>
-            <Menu />
-          </el-icon>首页</a></li>
-      <li><a href="#"><el-icon class='bx bx-store-alt'>
-            <Document />
-          </el-icon>代码</a></li>
-      <li class="active"><a href="#"><el-icon class='bx bx-analyse'>
-            <List />
-          </el-icon>备忘</a></li>
-      <li><a href="#"><el-icon class='bx bx-message-square-dots'>
-            <Promotion />
-          </el-icon>通讯</a></li>
-      <li><a href="#"><el-icon class='bx bx-group'>
-            <Comment />
-          </el-icon>聊天</a></li>
-      <li><a href="#"><el-icon class='bx bx-cog'>
-            <Tools />
-          </el-icon>设置</a></li>
-    </ul>
-  </div>
-
+  <Header />
   <div class="content">
     <!-- Navbar -->
     <nav data-tauri-drag-region>
@@ -181,28 +194,31 @@ onMounted(() => {
       </el-icon>
       <div class="titlebar">
 
-        <!-- 
-        <input type="checkbox" id="theme-toggle" hidden>
-        <label for="theme-toggle" class="theme-toggle"></label> -->
 
 
-        <div class="titlebar-button">
+        <div v-if="showBack" class="titlebar-button" @click="gobackUrl">
           <!-- <img src="https://api.iconify.design/mdi:window-minimize.svg" alt="minimize" /> -->
           <!-- <el-icon style="color: aliceblue;"><Minus /></el-icon> -->
-          <el-icon @click="toggleDarkDark" v-show="!store.isDark" :size="20"
+          <el-icon  :size="20" style="color: (store.isDark ? '#030b25' : '#DCDFE6');">
+            <Back />
+          </el-icon>
+        </div>
+
+        <div class="titlebar-button-top" @click="setAlwaysOnTop" :style="{'background': onTop?'#06b139':''}">
+          <el-icon :size="18" style="color: (store.isDark ? '#030b25' : '#DCDFE6');"><Stamp /></el-icon>
+        </div>
+        
+        <div class="titlebar-button" @click="toggleDarkDark">
+          <el-icon  v-show="!store.isDark" :size="20"
             style="color: (store.isDark ? '#030b25' : '#DCDFE6');">
             <Moon />
           </el-icon>
-
-          <el-icon @click="toggleDarkDark" v-show="store.isDark" :size="20"
+          <el-icon v-show="store.isDark" :size="20"
             style="color: (store.isDark ? '#030b25' : '#DCDFE6');">
             <Sunny />
           </el-icon>
         </div>
-
         <div class="titlebar-button" id="titlebar-minimize">
-          <!-- <img src="https://api.iconify.design/mdi:window-minimize.svg" alt="minimize" /> -->
-          <!-- <el-icon style="color: aliceblue;"><Minus /></el-icon> -->
           <el-icon>
             <SemiSelect />
           </el-icon>
@@ -211,21 +227,15 @@ onMounted(() => {
           <el-icon>
             <span class="iconfont icon-fullscreen"></span>
           </el-icon>
-
         </div>
         <div class="titlebar-button" id="titlebar-close">
           <el-icon>
             <CloseBold />
           </el-icon>
         </div>
-
       </div>
-
-
     </nav>
-
     <!-- End of Navbar -->
-
     <main>
       <router-view></router-view>
     </main>
@@ -265,6 +275,14 @@ onMounted(() => {
 }
 
 .titlebar-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+}
+
+.titlebar-button-top {
   display: inline-flex;
   justify-content: center;
   align-items: center;

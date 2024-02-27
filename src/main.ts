@@ -17,19 +17,33 @@ import "@/styles/index.scss";
 
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+// import { useRouter } from 'vue-router'
+// const routerS = useRouter()
+export const toUrlName = (routerName: any) => {
+  if (router == null) {
+    return
+  }
+  router.push({ name: routerName })
+}
+export const gobackUrl = () => {
+  if (router == null) {
+    return
+  }
+  window.history.length > 1 ? router.go(-1) : router.push('/')
+}
 
 const pinia = createPinia()
 const app = createApp(App)
 // 使用elementui的图标库
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
-    app.component(key, component)
+  app.component(key, component)
 }
 app.use(ElementPlus, {
-    locale: zhCn,
-  })
+  locale: zhCn,
+})
 app.use(router)
 app.use(pinia)
-app.use(VueAxios,axios)
+app.use(VueAxios, axios)
 // 全局挂载
 app.config.globalProperties.$echarts = echarts;
 

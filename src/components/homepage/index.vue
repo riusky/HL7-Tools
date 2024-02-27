@@ -16,7 +16,7 @@
     </div>
     <!-- Insights -->
     <ul class="insights">
-      <li>
+      <li @click="to_url('hl7sendtools')">
         <i class='bx bx-calendar-check'></i>
         <span class="info">
           <h3>
@@ -73,28 +73,28 @@
               <td>
                 <p>界面搭建</p>
               </td>
-              <td>10-12-2023</td>
+              <td>10-2-2024</td>
               <td><span class="status completed">Completed</span></td>
             </tr>
             <tr>
               <td>
                 <p>HL7发送工具</p>
               </td>
-              <td>15-12-2023</td>
+              <td>15-2-2024</td>
               <td><span class="status process">Processing</span></td>
             </tr>
             <tr>
               <td>
                 <p>DICOM</p>
               </td>
-              <td>16-12-2023</td>
+              <td>15-3-2024</td>
               <td><span class="status pending">Pending</span></td>
             </tr>
             <tr>
               <td>
                 <p>代码生成</p>
               </td>
-              <td>23-12-2023</td>
+              <td>15-4-2024</td>
               <td><span class="status process">Processing</span></td>
             </tr>
           </tbody>
@@ -113,7 +113,7 @@
           <li class="completed">
             <div class="task-title">
               <i class='bx bx-check-circle'></i>
-              <p>使用SQLite完成本机的数据持久化</p>
+              <p>使用SurrealDB完成本机的数据持久化</p>
             </div>
             <i class='bx bx-dots-vertical-rounded'></i>
           </li>
@@ -138,9 +138,24 @@
 </template>
 
 <script lang="ts" setup>
+import { toUrlName } from '@/main';
+
+// import { toUrlName } from "@/composables";
+// import { useRouter } from 'vue-router'
+// const router = useRouter()
+function to_url(routerName: string) {
+ 
+//  console.log("routerName",routerName)
+// //  const proxy = getCurrentInstance()?.proxy;
+// //  console.log("proxy",proxy)
+//  if (router == null) {
+//      return
+//  }
+//  router.push({ name: routerName })
 
 
-
+ toUrlName(routerName)
+}
 
 </script>
 

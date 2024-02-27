@@ -9,16 +9,16 @@ const routes: Array<RouteRecordRaw> = [{
     name: 'index',
     component: () => import('@/components/homepage/index.vue'),  /* 路由懒加载 */
 }, {
-  path: '/a',
-  name: 'a',
-  component: () => import('@/components/A.vue'),
+  path: '/hl7/sendtools',
+  name: 'hl7sendtools',
+  component: () => import('@/components/hl7/Hl7.vue'),
 }, {
   path: '/b',
-  name: 'b',
+  name: 'componentsb',
   component: () => import('@/components/B.vue'),
 }, {
   path: '/c',
-  name: 'c',
+  name: 'componentsc',
   component: () => import('@/components/C.vue'),
 }]
  

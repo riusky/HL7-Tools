@@ -126,7 +126,7 @@ body{
 
 .sidebar .side-menu{
     width: 100%;
-    margin-top: 48px;
+    margin-top: 10px;
 }
 
 .sidebar .side-menu li{
@@ -349,7 +349,7 @@ body{
 
 .content main{
     width: 100%;
-    padding: 36px 24px;
+    padding: 5px 24px;
     max-height: calc(100vh - 56px);
 }
 

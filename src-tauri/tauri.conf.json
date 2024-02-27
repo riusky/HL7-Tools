@@ -25,7 +25,8 @@
         "minimize": true,
         "unmaximize": true,
         "unminimize": true,
-        "startDragging": true
+        "startDragging": true,
+        "setAlwaysOnTop": true
       }
     },
     "bundle": {
@@ -56,6 +57,7 @@
         "title": "yd_tool",
         "width": 1000,
         "height": 800,
+        "minWidth": 768,
         "decorations": false
       }
     ]
