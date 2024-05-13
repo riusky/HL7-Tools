@@ -15,7 +15,7 @@ Since TypeScript cannot handle type information for `.vue` imports, they are shi
 
 ![HL7_mess.png](./HL7_mess.png)
 
-![HL7_send.png](HL7_send-1.png)
+![HL7_send.png](HL7_send.png)
 
 
 # 编译和打包
