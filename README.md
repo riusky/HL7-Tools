@@ -28,7 +28,7 @@ You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/
 
 ## 执行程序
 
-> pnpm tauri run dev
+> pnpm run tauri dev
 
 ## 构建可执行文件
 
