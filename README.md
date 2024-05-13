@@ -14,3 +14,22 @@ Since TypeScript cannot handle type information for `.vue` imports, they are shi
 2. Reload the VS Code window by running `Developer: Reload Window` from the command palette.
 
 You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/volar/discussions/471).
+
+
+# 编译和打包
+
+## 安装rust库
+
+> [!https://www.rust-lang.org/learn/get-started](rust)
+
+## 打包前端
+
+> pnpm install
+
+## 执行程序
+
+> pnpm tauri run dev
+
+## 构建可执行文件
+
+> pnpm tauri build
