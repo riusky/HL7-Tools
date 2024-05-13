@@ -1,10 +1,12 @@
 use chrono::Local;
 use reqwest::Client;
+use reqwest::header::{CONTENT_TYPE, CONTENT_LANGUAGE};
 use rusthl7::message::Message;
 use serde::{Deserialize, Serialize};
 use std::error::Error;
 use std::fmt;
 use std::net::SocketAddr;
+use std::time::Duration;
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use tokio::net::TcpStream;
 
@@ -122,7 +124,9 @@ impl Hl7Client {
     // 发送 HL7 消息通过 HTTP
     pub async fn send_hl7_message_http(&self) -> Result<String, Box<dyn Error>> {
         let mut status_log = String::new();
-        let client = Client::new();
+        let client = reqwest::Client::builder()
+        .timeout(Duration::from_secs(10)) // 设置超时时间为10秒
+        .build()?;
         let hl7_message_formatted: String = self
             .message
             .lines()
@@ -130,7 +134,8 @@ impl Hl7Client {
             .collect::<Vec<&str>>()
             .join("\r");
         let hl7_message = Message::new(&hl7_message_formatted);
-        let hl7_bytes = hl7_message.to_string().into_bytes();
+
+        let hl7_bytes: Vec<u8> = hl7_message.to_string().into_bytes();
         let addr = format!("http://{}:{}", self.server_address, self.port);
         status_log.push_str(&format!(
             "[{}] Sending HTTP request to {}\n",

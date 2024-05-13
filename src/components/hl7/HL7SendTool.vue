@@ -94,7 +94,7 @@ const cities = [
 ]
 
 const onSubmit = () => {
-    invoke('send_hl7_message', form).then((message) => response.value = message as string)
+    invoke('send_hl7_message', form).then((message) => response.value = message as string).catch((err) => response.value = err as string)
 }
 </script>
 
